@@ -20,8 +20,8 @@ static tjs_uint32 GetStride( const tjs_uint32 width, const tjs_uint32 bitCount) 
 	const tjs_uint32 stride = (width * byteCount + 3) & ~3;
 	return stride;
 }
-// DDS ‚ÌƒTƒ|[ƒg‚ÍWin8.1ˆÈ~‚È‚Ì‚ÅA•ªŠò‚µ‚Ä‚à‚¢‚¢‚ª‚Æ‚è‚ ‚¦‚¸‚ÍÀ‘•‚µ‚È‚¢Œ`‚É
-// ICO ‘‚«o‚µ‚ÍƒTƒ|[ƒg‚³‚ê‚È‚¢
+// DDS ã®ã‚µãƒãƒ¼ãƒˆã¯Win8.1ä»¥é™ãªã®ã§ã€åˆ†å²ã—ã¦ã‚‚ã„ã„ãŒã¨ã‚Šã‚ãˆãšã¯å®Ÿè£…ã—ãªã„å½¢ã«
+// ICO æ›¸ãå‡ºã—ã¯ã‚µãƒãƒ¼ãƒˆã•ã‚Œãªã„
 void TVPLoadGIF(void* formatdata, void *callbackdata, tTVPGraphicSizeCallback sizecallback, tTVPGraphicScanLineCallback scanlinecallback, tTVPMetaInfoPushCallback metainfopushcallback, IStream *src, tjs_int32 keyidx, tTVPGraphicLoadMode mode);
 void TVPLoadICO(void* formatdata, void *callbackdata, tTVPGraphicSizeCallback sizecallback, tTVPGraphicScanLineCallback scanlinecallback, tTVPMetaInfoPushCallback metainfopushcallback, IStream *src, tjs_int32 keyidx, tTVPGraphicLoadMode mode);
 void TVPLoadTIFF(void* formatdata, void *callbackdata, tTVPGraphicSizeCallback sizecallback, tTVPGraphicScanLineCallback scanlinecallback, tTVPMetaInfoPushCallback metainfopushcallback, IStream *src, tjs_int32 keyidx, tTVPGraphicLoadMode mode);
@@ -53,7 +53,7 @@ BOOL APIENTRY DllMain( HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpRese
 static tjs_int GlobalRefCountAtInit = 0;
 extern "C" HRESULT _stdcall V2Link(iTVPFunctionExporter *exporter)
 {
-	// ƒXƒ^ƒu‚Ì‰Šú‰»(•K‚¸‹Lq‚·‚é)
+	// ã‚¹ã‚¿ãƒ–ã®åˆæœŸåŒ–(å¿…ãšè¨˜è¿°ã™ã‚‹)
 	TVPInitImportStub(exporter);
 
 	CoInitialize(NULL);
@@ -76,7 +76,7 @@ extern "C" HRESULT _stdcall V2Unlink() {
 	TVPUnregisterGraphicLoadingHandler( ttstr(TJS_W(".tiff")), TVPLoadTIFF, TVPLoadHeaderTIFF, TVPSaveAsTIFF, TVPAcceptSaveAsTIFF, NULL );
 	CoUninitialize();
 
-	// ƒXƒ^ƒu‚Ìg—pI—¹(•K‚¸‹Lq‚·‚é)
+	// ã‚¹ã‚¿ãƒ–ã®ä½¿ç”¨çµ‚äº†(å¿…ãšè¨˜è¿°ã™ã‚‹)
 	TVPUninitImportStub();
 	return S_OK;
 }
@@ -247,7 +247,7 @@ void TVPSaveAsWIC(const GUID& guid, void* callbackdata, IStream* stream, const t
 	if( SUCCEEDED(hr) ) hr = encoder->Commit();
 }
 void TVPSaveAsGIF(void* formatdata, void* callbackdata, IStream* dst, const ttstr & mode, tjs_uint width, tjs_uint height, tTVPGraphicSaveScanLineCallback scanlinecallback, iTJSDispatch2* meta ) {
-	// ‚±‚Ì•û–@‚Å‚Í‚¤‚Ü‚­‘‚«o‚¹‚È‚¢—lq
+	// ã“ã®æ–¹æ³•ã§ã¯ã†ã¾ãæ›¸ãå‡ºã›ãªã„æ§˜å­
 	TVPSaveAsWIC( CLSID_WICGifEncoder, callbackdata, dst, mode, width, height, scanlinecallback, meta );
 }
 void TVPSaveAsTIFF(void* formatdata, void* callbackdata, IStream* dst, const ttstr & mode, tjs_uint width, tjs_uint height, tTVPGraphicSaveScanLineCallback scanlinecallback, iTJSDispatch2* meta ) {
